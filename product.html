@@ -1,0 +1,7 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product - Trio Fashion</title><link rel="stylesheet" href="css/style.css"></head>
+<body><header><h1>Trio Fashion</h1></header><main><div id="detail"></div></main>
+<script src="js/products.js"></script><script src="js/cart.js"></script><script>
+const id=new URLSearchParams(location.search).get('id'); const p=products.find(x=>x.id===id)||products[0];
+document.getElementById('detail').innerHTML=`<div class="card"><div class="placeholder">TRIO FASHION</div><h2>${p.name}</h2><h3>₹${p.price.toLocaleString('en-IN')}</h3><p>${p.description}</p><button class="btn" onclick="addToCart('${p.id}')">Add to Cart</button></div>`;
+</script></body></html>

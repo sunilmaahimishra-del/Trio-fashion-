@@ -1,35 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trio Fashion</title>
-<style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#222;background:#fafafa}
-header{background:#111;color:#fff;padding:16px 6%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
-.logo{font-size:25px;font-weight:800;letter-spacing:1px}.cart{background:#fff;color:#111;border:0;border-radius:20px;padding:9px 15px;font-weight:700}
-.hero{padding:65px 6%;background:linear-gradient(120deg,#eee,#fff);text-align:center}
-.hero h1{font-size:48px;margin:0 0 10px}.hero p{font-size:18px;color:#555}.shop{display:inline-block;background:#111;color:white;padding:13px 24px;border-radius:25px;text-decoration:none;margin-top:12px}
-section{padding:35px 6%}.cats{display:flex;gap:10px;flex-wrap:wrap}.cat{padding:10px 18px;border:1px solid #ddd;border-radius:20px;background:white}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px}.product{background:white;border-radius:14px;overflow:hidden;box-shadow:0 3px 15px #00000010}.pic{height:230px;background:#e8e8e8;display:flex;align-items:center;justify-content:center;font-size:65px}.info{padding:15px}.price{font-weight:800;font-size:19px}.old{text-decoration:line-through;color:#999;font-size:14px;margin-left:7px}.add{width:100%;margin-top:12px;padding:11px;border:0;border-radius:8px;background:#111;color:white;font-weight:700}
-footer{background:#111;color:#fff;text-align:center;padding:25px;margin-top:20px}
-@media(max-width:600px){.hero h1{font-size:36px}}
-</style>
-</head>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trio Fashion</title><link rel="stylesheet" href="css/style.css"></head>
 <body>
-<header><div class="logo">TRIO FASHION</div><button class="cart" onclick="showCart()">🛒 Cart (<span id="count">0</span>)</button></header>
-<div class="hero"><h1>Style. Comfort. You.</h1><p>Discover the latest fashion at Trio Fashion.</p><a class="shop" href="#products">Shop Now</a></div>
-<section><h2>Categories</h2><div class="cats"><div class="cat">Men</div><div class="cat">Women</div><div class="cat">Kids</div><div class="cat">New Arrivals</div></div></section>
-<section id="products"><h2>Featured Collection</h2><div class="products">
-<div class="product"><div class="pic">👕</div><div class="info"><h3>Classic T-Shirt</h3><span class="price">₹499</span><span class="old">₹699</span><button class="add" onclick="add()">Add to Cart</button></div></div>
-<div class="product"><div class="pic">👔</div><div class="info"><h3>Premium Shirt</h3><span class="price">₹899</span><span class="old">₹1,199</span><button class="add" onclick="add()">Add to Cart</button></div></div>
-<div class="product"><div class="pic">👗</div><div class="info"><h3>Women’s Dress</h3><span class="price">₹1,099</span><span class="old">₹1,499</span><button class="add" onclick="add()">Add to Cart</button></div></div>
-<div class="product"><div class="pic">🧥</div><div class="info"><h3>Casual Jacket</h3><span class="price">₹1,499</span><span class="old">₹1,999</span><button class="add" onclick="add()">Add to Cart</button></div></div>
-</div></section>
-<footer>© 2026 Trio Fashion • Fashion for Everyone</footer>
-<script>
-let count=0;function add(){count++;document.getElementById("count").textContent=count;alert("Product added to cart!")}
-function showCart(){alert("Your cart has "+count+" item(s).")}
-</script>
-</body>
-</html>
+<header><h1>Trio Fashion</h1><nav><a href="index.html">Home</a><a href="products.html">Products</a><a href="cart.html">Cart (<span id="cartCount">0</span>)</a></nav></header>
+<main class="hero"><h2>Style that fits you.</h2><p>Discover the latest fashion at Trio Fashion.</p><a class="btn" href="products.html">Shop Now</a></main>
+<script src="js/products.js"></script><script src="js/cart.js"></script></body></html>
