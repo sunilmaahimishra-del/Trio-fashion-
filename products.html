@@ -1,9 +1,64 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Products - Trio Fashion</title><link rel="stylesheet" href="css/style.css"></head>
-<body><header><h1>Trio Fashion</h1><nav><a href="index.html">Home</a><a href="products.html">Products</a><a href="cart.html">Cart (<span id="cartCount">0</span>)</a></nav></header>
-<main><h2>Our Products</h2><section id="productGrid" class="grid"></section></main>
-<script src="js/products.js"></script><script src="js/cart.js"></script><script>
-const grid=document.getElementById('productGrid');
-products.forEach(p=>grid.innerHTML+=`<article class="card"><div class="placeholder">TRIO FASHION</div><h3>${p.name}</h3><p>₹${p.price.toLocaleString('en-IN')}</p><button class="btn" onclick="addToCart('${p.id}')">Add to Cart</button></article>`);
-</script></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Products | Trio Fashion - Shirts, Jeans, Pants & Kurtis</title>
+
+  <meta name="description" content="Explore Trio Fashion products including stylish shirts, jeans, formal pants and kurtis at affordable prices. Shop online from Trio Fashion.">
+
+  <meta name="keywords" content="Trio Fashion products, shirts, jeans, formal pants, kurtis, men's fashion, women's fashion, affordable clothes">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://sunilmaahimishra-del.github.io/Trio-fashion-/products.html">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+  <h1>Trio Fashion</h1>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart (<span id="cartCount">0</span>)</a>
+  </nav>
+</header>
+
+<main>
+  <h2>Trio Fashion Products</h2>
+
+  <p>
+    Shop stylish shirts, jeans, formal pants and kurtis at affordable prices.
+    Discover the latest fashion collection from Trio Fashion.
+  </p>
+
+  <section id="productGrid" class="grid"></section>
+</main>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+
+<script>
+const grid = document.getElementById('productGrid');
+
+products.forEach(p => {
+  grid.innerHTML += `
+    <article class="card">
+      <div class="placeholder">TRIO FASHION</div>
+      <h3>${p.name}</h3>
+      <p>₹${p.price.toLocaleString('en-IN')}</p>
+      <button class="btn" onclick="addToCart('${p.id}')">
+        Add to Cart
+      </button>
+    </article>
+  `;
+});
+</script>
+
+</body>
+</html>
