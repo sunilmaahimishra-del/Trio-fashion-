@@ -56,8 +56,3 @@ const products = [
 ];
 
 window.products = products;
-const products = [
-  
-  
-
-window.products = products;
