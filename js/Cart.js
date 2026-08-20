@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cart - Trio Fashion</title><link rel="stylesheet" href="css/style.css"></head>
+<body><header><h1>Trio Fashion</h1><nav><a href="products.html">Products</a><a href="cart.html">Cart (<span id="cartCount">0</span>)</a></nav></header>
+<main><h2>Your Cart</h2><div id="cartItems"></div><div id="cartTotal" class="total"></div><a id="checkoutBtn" class="btn" href="checkout.html">Proceed to Checkout</a></main>
+<script src="js/products.js"></script><script src="js/cart.js"></script><script>
+renderCart();
+</script></body></html>
