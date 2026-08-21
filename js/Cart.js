@@ -1,31 +1,25 @@
-// Trio Fashion Cart System
+let cart = JSON.parse(localStorage.getItem("trioCart")) || [];
 
-function getCart() {
-  return JSON.parse(localStorage.getItem("trioCart")) || [];
-}
-
-function saveCart(cart) {
+function saveCart() {
   localStorage.setItem("trioCart", JSON.stringify(cart));
-  updateCartCount();
 }
 
-// Add product to cart
 function addToCart(productId) {
-  const cart = getCart();
 
-  const id = Number(productId);
-  const product = products.find(p => p.id === id);
+  const product = products.find(p => p.id === productId);
 
-  if (!product) {
-    alert("Product not found!");
-    return;
-  }
+  if (!product) return;
 
-  const existingItem = cart.find(item => item.id === id);
+  const existingProduct = cart.find(
+    item => item.id === productId
+  );
 
-  if (existingItem) {
-    existingItem.quantity += 1;
+  if (existingProduct) {
+
+    existingProduct.quantity += 1;
+
   } else {
+
     cart.push({
       id: product.id,
       name: product.name,
@@ -33,126 +27,169 @@ function addToCart(productId) {
       image: product.image,
       quantity: 1
     });
+
   }
 
-  saveCart(cart);
+  saveCart();
+  updateCartCount();
 
-  alert(product.name + " added to cart!");
+  alert(product.name + " cart mein add ho gaya!");
+
 }
 
-// Update cart number
-function updateCartCount() {
-  const cart = getCart();
+function removeFromCart(productId) {
 
-  const count = cart.reduce((total, item) => {
-    return total + item.quantity;
-  }, 0);
+  cart = cart.filter(
+    item => item.id !== productId
+  );
 
-  const cartCount = document.getElementById("cartCount");
+  saveCart();
+  displayCart();
+  updateCartCount();
 
-  if (cartCount) {
-    cartCount.textContent = count;
+}
+
+function increaseQuantity(productId) {
+
+  const item = cart.find(
+    product => product.id === productId
+  );
+
+  if (item) {
+    item.quantity++;
   }
+
+  saveCart();
+  displayCart();
+  updateCartCount();
+
 }
 
-// Change quantity
-function changeQuantity(productId, change) {
-  const cart = getCart();
-  const id = Number(productId);
+function decreaseQuantity(productId) {
 
-  const item = cart.find(item => item.id === id);
+  const item = cart.find(
+    product => product.id === productId
+  );
 
   if (!item) return;
 
-  item.quantity += change;
+  if (item.quantity > 1) {
 
-  if (item.quantity <= 0) {
-    const index = cart.findIndex(item => item.id === id);
-    cart.splice(index, 1);
+    item.quantity--;
+
+  } else {
+
+    removeFromCart(productId);
+    return;
+
   }
 
-  saveCart(cart);
-  renderCart();
+  saveCart();
+  displayCart();
+  updateCartCount();
+
 }
 
-// Remove product
-function removeFromCart(productId) {
-  const cart = getCart();
-  const id = Number(productId);
+function updateCartCount() {
 
-  const newCart = cart.filter(item => item.id !== id);
+  const cartCount = document.getElementById("cartCount");
 
-  saveCart(newCart);
-  renderCart();
+  if (!cartCount) return;
+
+  const totalItems = cart.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  cartCount.textContent = totalItems;
+
 }
 
-// Display cart
-function renderCart() {
-  const cartItems = document.getElementById("cartItems");
-  const cartTotal = document.getElementById("cartTotal");
+function displayCart() {
 
-  if (!cartItems || !cartTotal) return;
+  const cartContainer =
+    document.getElementById("cartItems");
 
-  const cart = getCart();
+  const cartTotal =
+    document.getElementById("cartTotal");
+
+  if (!cartContainer) return;
+
+  cartContainer.innerHTML = "";
 
   if (cart.length === 0) {
-    cartItems.innerHTML = "<p>Your cart is empty.</p>";
-    cartTotal.innerHTML = "Total: ₹0";
-    updateCartCount();
+
+    cartContainer.innerHTML =
+      "<h3>Your cart is empty.</h3>";
+
+    if (cartTotal) {
+      cartTotal.textContent = "₹0";
+    }
+
     return;
+
   }
 
   let total = 0;
 
-  cartItems.innerHTML = cart.map(item => {
-    const itemTotal = item.price * item.quantity;
+  cart.forEach(item => {
+
+    const itemTotal =
+      item.price * item.quantity;
+
     total += itemTotal;
 
-    return `
-      <div class="card cart-item">
+    const div = document.createElement("div");
 
-        <img 
-          src="${item.image}" 
-          alt="${item.name}"
-          style="width:120px; height:150px; object-fit:cover;"
-        >
+    div.className = "cart-item";
+
+    div.innerHTML = `
+
+      <img
+        src="${item.image}"
+        alt="${item.name}"
+        width="100"
+      >
+
+      <div>
 
         <h3>${item.name}</h3>
 
-        <p>Price: ₹${item.price.toLocaleString("en-IN")}</p>
+        <p>₹${item.price}</p>
 
-        <div>
-          <button onclick="changeQuantity(${item.id}, -1)">−</button>
+        <button onclick="decreaseQuantity(${item.id})">
+          −
+        </button>
 
-          <strong style="margin:0 15px;">
-            ${item.quantity}
-          </strong>
+        <span style="margin:0 10px;">
+          ${item.quantity}
+        </span>
 
-          <button onclick="changeQuantity(${item.id}, 1)">+</button>
-        </div>
+        <button onclick="increaseQuantity(${item.id})">
+          +
+        </button>
 
         <p>
-          Item Total:
-          ₹${itemTotal.toLocaleString("en-IN")}
+          Subtotal: ₹${itemTotal}
         </p>
 
-        <button 
-          class="btn"
-          onclick="removeFromCart(${item.id})"
-        >
+        <button onclick="removeFromCart(${item.id})">
           Remove
         </button>
 
       </div>
+
     `;
-  }).join("");
 
-  cartTotal.innerHTML = `
-    <h2>Total: ₹${total.toLocaleString("en-IN")}</h2>
-  `;
+    cartContainer.appendChild(div);
 
-  updateCartCount();
+  });
+
+  if (cartTotal) {
+    cartTotal.textContent = "₹" + total;
+  }
+
 }
 
-// Update cart count when page loads
 updateCartCount();
+displayCart();
