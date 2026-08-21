@@ -1,8 +1,112 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cart - Trio Fashion</title><link rel="stylesheet" href="css/style.css"></head>
-<body><header><h1>Trio Fashion</h1><nav><a href="products.html">Products</a><a href="cart.html">Cart (<span id="cartCount">0</span>)</a></nav></header>
-<main><h2>Your Cart</h2><div id="cartItems"></div><div id="cartTotal" class="total"></div><a id="checkoutBtn" class="btn" href="checkout.html">Proceed to Checkout</a></main>
-<script src="js/products.js"></script><script src="js/cart.js"></script><script>
-renderCart();
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>Cart - Trio Fashion</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+
+    .cart-container {
+      max-width: 900px;
+      margin: auto;
+      padding: 25px 15px;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      padding: 15px;
+      margin-bottom: 15px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .cart-item img {
+      width: 120px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .cart-item button {
+      padding: 7px 12px;
+      margin: 3px;
+      cursor: pointer;
+    }
+
+    .total-box {
+      text-align: right;
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 25px;
+    }
+
+    @media(max-width:600px) {
+
+      .cart-item {
+        flex-direction: column;
+        text-align: center;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+
+  <h1>Trio Fashion</h1>
+
+  <nav>
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="products.html">
+      Products
+    </a>
+
+    <a href="cart.html">
+      Cart (<span id="cartCount">0</span>)
+    </a>
+
+  </nav>
+
+</header>
+
+<main class="cart-container">
+
+  <h2>Your Shopping Cart</h2>
+
+  <div id="cartItems"></div>
+
+  <div class="total-box">
+
+    Total:
+    <span id="cartTotal">₹0</span>
+
+  </div>
+
+</main>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+
+</body>
+
+</html>
